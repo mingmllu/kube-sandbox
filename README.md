@@ -3,7 +3,7 @@
 ### Add workstation (Ubuntu 16.04) to the Kubernetes cluster:
 
 1. sudo swapoff -a
-2. curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+2. curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 3. echo 'deb http://apt.kubernetes.io/ kubernetes-xenial main' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 4. sudo apt-get update -y
 5. sudo apt-get install kubelet kubeadm kubectl -y
