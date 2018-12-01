@@ -1,6 +1,6 @@
 ## kube-sandbox
 
-### Install minikube
+### Install minikube on Ubuntu 16.04
 
 0. Requirements:
    * docker version 18.06. If docker version 18.09 installed, remove it first and then run "sudo apt-get install docker-ce=18.06.1~ce~3-0~ubuntu" to re-install it
