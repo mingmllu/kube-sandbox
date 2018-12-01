@@ -3,7 +3,7 @@
 ### Install minikube on Ubuntu 16.04
 
 0. Requirements:
-   * docker version 18.06. If docker version 18.09 installed, remove it first and then run ```sudo apt-get install docker-ce=18.06.1~ce~3-0~ubuntu``` to re-install the docker version that is accepted by kubernetes
+   * docker version 18.06. If docker version 18.09 installed, remove it first and then run ```sudo apt-get install docker-ce=18.06.1~ce~3-0~ubuntu``` to re-install the docker version that is supported by kubernetes
 1. Install kubectl 
    * ```sudo apt-get update && sudo apt-get install -y apt-transport-https```
    * ```curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -```
@@ -26,7 +26,6 @@ export MINIKUBE_HOME=$HOME
 export CHANGE_MINIKUBE_NONE_USER=true
 export KUBECONFIG=$HOME/.kube/config
 ```
-   
 
 ### Add workstation (Ubuntu 16.04) to the Kubernetes cluster:
 
