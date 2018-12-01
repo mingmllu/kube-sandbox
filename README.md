@@ -18,7 +18,7 @@
    * sudo chgrp -R $USER $HOME/.kube
    * sudo chown -R $USER $HOME/.minikube
    * sudo chgrp -R $USER $HOME/.minikube
-> When using the none driver, the kubectl config and credentials generated will be root owned and will appear in the root home directory. You will need to set the correct permissions. This can also be done automatically by setting the env var CHANGE_MINIKUBE_NONE_USER=true.
+> When using the none driver, the kubectl config and credentials generated will be root owned. You will need to set the correct permissions as above. This can also be done automatically by setting the env var CHANGE_MINIKUBE_NONE_USER=true.
 ```
 export MINIKUBE_WANTUPDATENOTIFICATION=false
 export MINIKUBE_WANTREPORTERRORPROMPT=false
