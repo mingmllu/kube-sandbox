@@ -1,5 +1,33 @@
 ## kube-sandbox
 
+### Install minikube
+
+0. Requirements:
+   * docker version 18.06. If docker version 18.09 installed, remove it first and then run "sudo apt-get install docker-ce=18.06.1~ce~3-0~ubuntu" to re-install it
+1. Install kubectl 
+   * sudo apt-get update && sudo apt-get install -y apt-transport-https
+   * curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+   * echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+   * sudo apt-get update
+   * sudo apt-get install -y kubectl
+2. Install minikube 
+   * curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && sudo install minikube-linux-amd64 /usr/local/bin/minikube
+3. Launch minikube 
+   * sudo -E minikube --vm-driver=none
+   * sudo chown -R $USER $HOME/.kube
+   * sudo chgrp -R $USER $HOME/.kube
+   * sudo chown -R $USER $HOME/.minikube
+   * sudo chgrp -R $USER $HOME/.minikube
+> When using the none driver, the kubectl config and credentials generated will be root owned and will appear in the root home directory. You will need to set the correct permissions. This can also be done automatically by setting the env var CHANGE_MINIKUBE_NONE_USER=true.
+```
+export MINIKUBE_WANTUPDATENOTIFICATION=false
+export MINIKUBE_WANTREPORTERRORPROMPT=false
+export MINIKUBE_HOME=$HOME
+export CHANGE_MINIKUBE_NONE_USER=true
+export KUBECONFIG=$HOME/.kube/config
+```
+   
+
 ### Add workstation (Ubuntu 16.04) to the Kubernetes cluster:
 
 1. sudo swapoff -a
