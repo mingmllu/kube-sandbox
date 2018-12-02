@@ -51,9 +51,85 @@ export KUBECONFIG=$HOME/.kube/config
 10. export NAMESPACE=kubeflow\nkubectl port-forward -n ${NAMESPACE}  `kubectl get pods -n ${NAMESPACE} --selector=service=ambassador -o jsonpath='{.items[0].metadata.name}'` 8080:80
 11. go to localhost:8080 to see the kubeflow dashboard
 
-### Install ksonnet (https://github.com/ksonnet/ksonnet)
+### Install ksonnet
+
+See https://github.com/ksonnet/ksonnet
 
 1. Download the binary code ks_0.13.1_linux_amd64.tar.gz at ```https://github.com/ksonnet/ksonnet/releases```
 2. Run ```tar -xvf ks_0.13.1_linux_amd64.tar.gz```
 3. Run ```~/Downloads/ks_0.13.1_linux_amd64$ sudo cp ks /usr/bin/ks```
 
+### Set up Kubleflow
+
+See https://www.kubeflow.org/docs/started/getting-started/#quick-start
+1. Run the following commands to download kfctl.sh
+```
+export KUBEFLOW_SRC=$HOME/kubeflow
+mkdir ${KUBEFLOW_SRC}
+cd ${KUBEFLOW_SRC}
+export KUBEFLOW_TAG=v0.3.1
+
+curl https://raw.githubusercontent.com/kubeflow/kubeflow/${KUBEFLOW_TAG}/scripts/download.sh | bash
+```
+> You will see the ```kubeflow``` and ```scripts``` directories created under the directory ```${KUBEFLOW_SRC}```
+2. Run the following command to create kubeflow environment variables
+```
+export KFAPP=kf-basic
+${KUBEFLOW_SRC}/scripts/kfctl.sh init ${KFAPP} --platform none
+```
+> ```${KFAPP}``` is the name of a directory where you want kubeflow configurations to be stored. This directory will be created under the current working directory when you run init. The new directory`kf-basic` will be created and it will contain an ```env.sh``` file that stores environment variables as below
+```
+PLATFORM=none
+KUBEFLOW_REPO=/home/appml/kubeflow
+KUBEFLOW_VERSION=master
+KUBEFLOW_KS_DIR=/home/appml/kf-basic/ks_app
+KUBEFLOW_DOCKER_REGISTRY=
+K8S_NAMESPACE=kubeflow
+KUBEFLOW_CLOUD=null
+```
+3. Run the following command to install necessary packages and generate ksonnet application components
+```
+cd ${KFAPP}
+${KUBEFLOW_SRC}/scripts/kfctl.sh generate k8s
+```
+>The ksonnet app will be created in the directory ```${KFAPP}/ks_app```
+4. Run the following command to deploy the components into pods in our kubernetes cluster
+```
+${KUBEFLOW_SRC}/scripts/kfctl.sh apply k8s
+```
+> We can check the deployment status by:
+```
+appml@woodpecker:~/kf-basic$ kubectl get pods --all-namespaces
+NAMESPACE     NAME                                                      READY   STATUS             RESTARTS   AGE
+kube-system   coredns-c4cffd6dc-7dq22                                   0/1     CrashLoopBackOff   398        1d
+kube-system   etcd-minikube                                             1/1     Running            0          1d
+kube-system   kube-addon-manager-minikube                               1/1     Running            0          1d
+kube-system   kube-apiserver-minikube                                   1/1     Running            0          1d
+kube-system   kube-controller-manager-minikube                          1/1     Running            0          1d
+kube-system   kube-dns-86f4d74b45-nl5ng                                 3/3     Running            6          1d
+kube-system   kube-proxy-pwgdn                                          1/1     Running            0          1d
+kube-system   kube-scheduler-minikube                                   1/1     Running            0          1d
+kube-system   kubernetes-dashboard-6f4cfc5d87-rjm9c                     1/1     Running            0          1d
+kube-system   storage-provisioner                                       1/1     Running            0          1d
+kubeflow      ambassador-7fb86f6bc5-5rshb                               3/3     Running            0          20m
+kubeflow      ambassador-7fb86f6bc5-dwg2q                               3/3     Running            0          20m
+kubeflow      ambassador-7fb86f6bc5-qwq5b                               3/3     Running            0          20m
+kubeflow      argo-ui-7b6585d85d-k7xhv                                  1/1     Running            0          20m
+kubeflow      centraldashboard-f8d7d97fb-85p4v                          1/1     Running            0          20m
+kubeflow      modeldb-backend-69dfc464df-hmqt6                          0/1     CrashLoopBackOff   7          19m
+kubeflow      modeldb-db-6cf5bb764-v6frj                                1/1     Running            0          19m
+kubeflow      modeldb-frontend-74b66f8dc8-jhpwl                         1/1     Running            0          19m
+kubeflow      spartakus-volunteer-65ccbf687-n5cpm                       1/1     Running            0          19m
+kubeflow      studyjob-controller-68f5948984-dssvw                      1/1     Running            0          19m
+kubeflow      tf-hub-0                                                  1/1     Running            0          20m
+kubeflow      tf-job-dashboard-7cddcdf9c4-xhrxd                         1/1     Running            0          20m
+kubeflow      tf-job-operator-v1alpha2-6566f45db-kh77j                  1/1     Running            0          20m
+kubeflow      vizier-core-d74cbfd98-wlh2q                               1/1     Running            3          19m
+kubeflow      vizier-db-cc59bc8bd-khsd6                                 1/1     Running            0          19m
+kubeflow      vizier-suggestion-bayesianoptimization-788df66688-mh8dx   1/1     Running            0          19m
+kubeflow      vizier-suggestion-grid-76c648b78-n8l4b                    1/1     Running            0          19m
+kubeflow      vizier-suggestion-hyperband-5df8cf7bc8-x4tff              1/1     Running            0          19m
+kubeflow      vizier-suggestion-random-65b9fd7c48-s59mk                 1/1     Running            0          19m
+kubeflow      workflow-controller-59c7967f59-tvfhc                      1/1     Running            0          20m
+appml@woodpecker:~/kf-basic$ 
+```
