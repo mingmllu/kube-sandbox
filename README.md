@@ -50,3 +50,10 @@ export KUBECONFIG=$HOME/.kube/config
 9. ks apply ${KF_ENV} -c ${CNN_JOB_NAME}
 10. export NAMESPACE=kubeflow\nkubectl port-forward -n ${NAMESPACE}  `kubectl get pods -n ${NAMESPACE} --selector=service=ambassador -o jsonpath='{.items[0].metadata.name}'` 8080:80
 11. go to localhost:8080 to see the kubeflow dashboard
+
+### Install ksonnet (https://github.com/ksonnet/ksonnet)
+
+1. Download the binary code ks_0.13.1_linux_amd64.tar.gz at ```https://github.com/ksonnet/ksonnet/releases```
+2. Run ```tar -xvf ks_0.13.1_linux_amd64.tar.gz```
+3. Run ```~/Downloads/ks_0.13.1_linux_amd64$ sudo cp ks /usr/bin/ks```
+
