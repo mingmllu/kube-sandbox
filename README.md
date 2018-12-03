@@ -13,7 +13,7 @@
 2. Install minikube 
    * ```curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && sudo install minikube-linux-amd64 /usr/local/bin/minikube```
 3. Launch minikube 
-   * ```sudo -E minikube --vm-driver=none```
+   * ```sudo -E minikube start --vm-driver=none```
    * ```sudo chown -R $USER $HOME/.kube```
    * ```sudo chgrp -R $USER $HOME/.kube```
    * ```sudo chown -R $USER $HOME/.minikube```
