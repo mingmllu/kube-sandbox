@@ -2,6 +2,13 @@
 
 ### Install minikube on Ubuntu 16.04
 
+https://medium.com/@nieldw/switching-from-minikube-with-virtualbox-to-kvm-2f742db704c9
+https://websiteforstudents.com/virtualbox-5-2-on-ubuntu-16-04-lts-server-headless/
+https://medium.com/margarytachepiga/how-to-install-minikube-on-ubuntu-88a3034801b1
+https://medium.com/@nieldw/running-minikube-with-vm-driver-none-47de91eab84c?email=antti18%2Bmedium%40kaihola.fi&g-recaptcha-response
+https://github.com/kubernetes/minikube
+
+
 0. Requirements:
    * docker version 18.06. If docker version 18.09 installed, remove it first and then run ```sudo apt-get install docker-ce=18.06.1~ce~3-0~ubuntu``` to re-install the docker version that is supported by kubernetes
 1. Install kubectl 
