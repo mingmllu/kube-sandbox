@@ -140,6 +140,11 @@ kubeflow      vizier-suggestion-random-65b9fd7c48-s59mk                 1/1     
 kubeflow      workflow-controller-59c7967f59-tvfhc                      1/1     Running            0          20m
 appml@woodpecker:~/kf-basic$ 
 ```
+I also have the same issue.
+i'v solve the problem by deleting the plugins 'loop' within the cm of coredns. but i don't know if this cloud case other porblems.
+1、kubectl edit cm coredns -n kube-system
+2、delete ‘loop’ ,save and exit
+3、restart coredns pods by："kubctel delete pod coredns.... -n kube-system"
 ```
 appml@woodpecker:~/kf-basic$ kubectl get pod --all-namespaces
 NAMESPACE     NAME                                                      READY   STATUS    RESTARTS   AGE
