@@ -140,3 +140,37 @@ kubeflow      vizier-suggestion-random-65b9fd7c48-s59mk                 1/1     
 kubeflow      workflow-controller-59c7967f59-tvfhc                      1/1     Running            0          20m
 appml@woodpecker:~/kf-basic$ 
 ```
+```
+appml@woodpecker:~/kf-basic$ kubectl get pod --all-namespaces
+NAMESPACE     NAME                                                      READY   STATUS    RESTARTS   AGE
+kube-system   coredns-c4cffd6dc-qww29                                   1/1     Running   2          24m
+kube-system   etcd-minikube                                             1/1     Running   0          28m
+kube-system   kube-addon-manager-minikube                               1/1     Running   0          27m
+kube-system   kube-apiserver-minikube                                   1/1     Running   0          28m
+kube-system   kube-controller-manager-minikube                          1/1     Running   0          27m
+kube-system   kube-dns-86f4d74b45-rgtvw                                 3/3     Running   0          28m
+kube-system   kube-proxy-c8kct                                          1/1     Running   0          28m
+kube-system   kube-scheduler-minikube                                   1/1     Running   0          27m
+kube-system   kubernetes-dashboard-6f4cfc5d87-j8kvx                     1/1     Running   0          28m
+kube-system   storage-provisioner                                       1/1     Running   0          28m
+kubeflow      ambassador-7fb86f6bc5-j2lfd                               3/3     Running   0          8m
+kubeflow      ambassador-7fb86f6bc5-q57qm                               3/3     Running   1          8m
+kubeflow      ambassador-7fb86f6bc5-z62k2                               3/3     Running   2          8m
+kubeflow      argo-ui-7b6585d85d-djk92                                  1/1     Running   0          7m
+kubeflow      centraldashboard-f8d7d97fb-kfz4m                          1/1     Running   0          8m
+kubeflow      modeldb-backend-69dfc464df-9nw7k                          1/1     Running   4          7m
+kubeflow      modeldb-db-6cf5bb764-pxg6c                                1/1     Running   0          7m
+kubeflow      modeldb-frontend-74b66f8dc8-62bqq                         1/1     Running   0          7m
+kubeflow      spartakus-volunteer-5b9f857d45-s6p6n                      1/1     Running   0          6m
+kubeflow      studyjob-controller-68f5948984-n8fll                      1/1     Running   0          6m
+kubeflow      tf-hub-0                                                  1/1     Running   0          8m
+kubeflow      tf-job-dashboard-7cddcdf9c4-mkjpl                         1/1     Running   0          8m
+kubeflow      tf-job-operator-v1alpha2-6566f45db-stq7m                  1/1     Running   0          8m
+kubeflow      vizier-core-d74cbfd98-56qj4                               1/1     Running   2          6m
+kubeflow      vizier-db-cc59bc8bd-xwxqb                                 1/1     Running   0          6m
+kubeflow      vizier-suggestion-bayesianoptimization-788df66688-7d7w7   1/1     Running   0          7m
+kubeflow      vizier-suggestion-grid-76c648b78-zsml2                    1/1     Running   0          7m
+kubeflow      vizier-suggestion-hyperband-5df8cf7bc8-jwvlr              1/1     Running   0          6m
+kubeflow      vizier-suggestion-random-65b9fd7c48-98flb                 1/1     Running   0          6m
+kubeflow      workflow-controller-59c7967f59-sg7hx                      1/1     Running   0          7m
+```
