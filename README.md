@@ -42,7 +42,7 @@ export KUBECONFIG=$HOME/.kube/config
     * ```echo 'deb http://apt.kubernetes.io/ kubernetes-xenial main' | sudo tee /etc/apt/sources.list.d/kubernetes.list```
     * ```sudo apt-get update -y```
     * ```sudo apt-get install kubelet kubeadm kubectl -y```
-> Make sure that the worker node's kubernetes client version is cosnsitent with the that of the master node. If the master node uses an old version, you may need to downgrade your installations. For example, ```sudo apt-get install kubelet=1.12.2-00 kubeadm=1.12.2-00 kubectl=1.12.2-00 -y --allow-downgrades```
+> Make sure that the worker node's kubernetes client version is consistent with that of the master node. If the master node uses an old version, you may need to downgrade your installations. For example, ```sudo apt-get install kubelet=1.12.2-00 kubeadm=1.12.2-00 kubectl=1.12.2-00 -y --allow-downgrades```
 
 3. go to https://github.com/NVIDIA/k8s-device-plugin#quick-start and make sure you have followed the section titled: Preparing your GPU nodes
 4. Run ```sudo kubeadm join 135.222.154.219:6443 --token odsb5k.ho566dm6817oa696 --discovery-token-ca-cert-hash sha256:903d8bad14f6bb297a596fb39188164508a41bbe68d9f0410e3a429ce0059e0b```
