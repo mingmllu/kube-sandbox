@@ -1,5 +1,7 @@
 ## kube-sandbox
 
+Kubernetes API https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#-strong-api-overview-strong-
+
 ### Install minikube on Ubuntu 16.04
 
 https://medium.com/@nieldw/switching-from-minikube-with-virtualbox-to-kvm-2f742db704c9
