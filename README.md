@@ -184,3 +184,34 @@ kubeflow      vizier-suggestion-hyperband-5df8cf7bc8-jwvlr              1/1     
 kubeflow      vizier-suggestion-random-65b9fd7c48-98flb                 1/1     Running   0          6m
 kubeflow      workflow-controller-59c7967f59-sg7hx                      1/1     Running   0          7m
 ```
+### Mount NFS Volume
+```
+mmlu@cheetah:/nfs$ ls
+experiments  general
+mmlu@cheetah:/nfs$ cd experiments/
+mmlu@cheetah:/nfs/experiments$ ls
+segmentation
+mmlu@cheetah:/nfs/experiments$ cd ../
+mmlu@cheetah:/nfs$ sudo chmod 777 experiments/
+mmlu@cheetah:/nfs$ sudo chmod 777 experiments/segmentation/
+mmlu@cheetah:/nfs$ ls
+experiments  general
+mmlu@cheetah:/nfs$ sudo mount 135.222.154.219:/var/nfs/experiments/segmentation /nfs/experiments/segmentation
+mmlu@cheetah:/nfs$ cd
+mmlu@cheetah:~$ df -h
+Filesystem                                         Size  Used Avail Use% Mounted on
+udev                                                16G     0   16G   0% /dev
+tmpfs                                              3.2G   51M  3.1G   2% /run
+/dev/sda2                                          1.8T   88G  1.7T   6% /
+tmpfs                                               16G   72M   16G   1% /dev/shm
+tmpfs                                              5.0M  4.0K  5.0M   1% /run/lock
+tmpfs                                               16G     0   16G   0% /sys/fs/cgroup
+/dev/loop0                                          90M   90M     0 100% /snap/core/6034
+/dev/loop2                                          89M   89M     0 100% /snap/core/5897
+/dev/sda1                                          511M  7.0M  505M   2% /boot/efi
+tmpfs                                              3.2G  112K  3.2G   1% /run/user/1000
+/dev/loop3                                          90M   90M     0 100% /snap/core/6130
+135.222.154.219:/var/nfs/experiments/segmentation  1.8T   46G  1.7T   3% /nfs/experiments/segmentation
+mmlu@cheetah:~$ cd /nfs/experiments/segmentation/
+mmlu@cheetah:/nfs/experiments/segmentation$ ls
+```
