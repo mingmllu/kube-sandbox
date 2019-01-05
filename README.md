@@ -13,6 +13,7 @@ https://github.com/kubernetes/minikube
 
 0. Requirements:
    * docker version 18.06. If docker version 18.09 installed, remove it first and then run ```sudo apt-get install docker-ce=18.06.1~ce~3-0~ubuntu``` to re-install the docker version that is supported by kubernetes
+   * To execute the docker command without sudo, run ```sudo usermod -aG docker ${USER}``` and then ```su - ${USER}``` 
 1. Install kubectl 
    * ```sudo apt-get update && sudo apt-get install -y apt-transport-https```
    * ```curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -```
