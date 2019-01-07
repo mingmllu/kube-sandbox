@@ -226,4 +226,13 @@ tmpfs                                              3.2G  112K  3.2G   1% /run/us
 135.222.154.219:/var/nfs/experiments/segmentation  1.8T   46G  1.7T   3% /nfs/experiments/segmentation
 mmlu@cheetah:~$ cd /nfs/experiments/segmentation/
 mmlu@cheetah:/nfs/experiments/segmentation$ ls
+
+ you need to type this into any terminal to mount the directory: 
+sudo mount 135.222.154.219:/var/nfs/experiments/segmentation    /nfs/experiments/segmentation
+ 
+Then do this:
+sudo vi /etc/fstab
+ 
+add this line so that when you reboot next time, it is automatically mounted:
+135.222.154.219:/var/nfs/experiments/segmentation    /nfs/experiments/segmentation   nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0
 ```
