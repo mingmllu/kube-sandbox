@@ -59,6 +59,17 @@ export KUBECONFIG=$HOME/.kube/config
     #Test nvidia-smi with the latest official CUDA image
     $ docker run --runtime=nvidia --rm nvidia/cuda:9.0-base nvidia-smi
     ```
+    * Check the file /etc/docker/daemon.json. It may look like this:
+    ```
+    {
+        "runtimes": {
+            "nvidia": {
+                "path": "nvidia-container-runtime",
+                "runtimeArgs": []
+            }
+         }
+    }
+    ```
 4. Run ```sudo kubeadm join 135.222.154.219:6443 --token odsb5k.ho566dm6817oa696 --discovery-token-ca-cert-hash sha256:903d8bad14f6bb297a596fb39188164508a41bbe68d9f0410e3a429ce0059e0b```
 
 ### How to run a simple TFjob in the cluster (tested in AWS only)
