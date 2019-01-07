@@ -48,6 +48,17 @@ export KUBECONFIG=$HOME/.kube/config
 > Make sure that the worker node's kubernetes client version is consistent with that of the master node. If the master node uses an old version, you may need to downgrade your installations. For example, ```sudo apt-get install kubelet=1.12.2-00 kubeadm=1.12.2-00 kubectl=1.12.2-00 -y --allow-downgrades```
 
 3. go to https://github.com/NVIDIA/k8s-device-plugin#quick-start and make sure you have followed the section titled: Preparing your GPU nodes
+    * [Install nvidia-docker](https://github.com/NVIDIA/nvidia-docker)
+    ```
+    $ curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+    $ distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+    $ curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+    $ sudo apt-get update
+    $ sudo apt-get install -y --allow-unauthenticated nvidia-docker2
+    $ sudo pkill -SIGHUP dockerd
+    #Test nvidia-smi with the latest official CUDA image
+    $ docker run --runtime=nvidia --rm nvidia/cuda:9.0-base nvidia-smi
+    ```
 4. Run ```sudo kubeadm join 135.222.154.219:6443 --token odsb5k.ho566dm6817oa696 --discovery-token-ca-cert-hash sha256:903d8bad14f6bb297a596fb39188164508a41bbe68d9f0410e3a429ce0059e0b```
 
 ### How to run a simple TFjob in the cluster (tested in AWS only)
