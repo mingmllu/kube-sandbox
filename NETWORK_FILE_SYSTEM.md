@@ -55,7 +55,7 @@ We’re using the same configuration options for both directories with the excep
 * **rw**: This option gives the client computer both read and write access to the volume.
 * **sync**: This option forces NFS to write changes to disk before replying. This results in a more stable and consistent environment since the reply reflects the actual state of the remote volume. However, it also reduces the speed of file operations.
 * **no_subtree_check**: This option prevents subtree checking, which is a process where the host must check whether the file is actually still available in the exported tree for every request. This can cause many problems when a file is renamed while the client has it opened. In almost all cases, it is better to disable subtree checking.
-* **no_root_squash**: By default, NFS translates requests from a root user remotely into a non-privileged user on the server. This was intended as security feature to prevent a root account on the client from using the file system of the host as root. no_root_squash disables this behavior for certain shares.
+* **no_root_squash**: By default, NFS translates requests from a root user remotely into a non-privileged user on the server. This was intended as security feature to prevent a root account on the client from using the file system of the host as root. ```no_root_squash``` disables this behavior for certain shares.
 
 To make the shares available to the clients that you configured, restart the NFS server with the following command
 ```
@@ -97,9 +97,18 @@ $ df -h
 
 To see how much space is actually being used under each mount point, use the disk usage command ```du``` and the path of the mount. The ```-s``` flag will provide a summary of usage rather than displaying the usage for every file. The ```-h``` will print human readable output.
 
-### Step 7 — Testing NFS Access
+### Step 7 — Testing NFS Access on the Client
 
-### Step 8 — Mounting the Remote NFS Directories at Boot
+```
+$ sudo touch /nfs/general/general.test
+$ ls -l /nfs/general/general.test
+-rw-r--r-- 1 nobody nogroup 0 Aug  1 13:31 /nfs/general/general.test'
+$ sudo touch /nfs/home/home.test
+$ ls -l /nfs/home/home.test
+-rw-r--r-- 1 root root 0 Aug  1 13:32 /nfs/home/home.test
+```
+
+### Step 8 — Mounting the Remote NFS Directories at Boot on the Client
 
 We can mount the remote NFS shares automatically at boot by adding them to /etc/fstab file on the client.
 
@@ -115,7 +124,7 @@ At the bottom of the file, we're going to add a line for each of our shares. The
 ```
 The client server will automatically mount the remote partitions at boot, although it may take a few moments for the connection to be made and the shares to be available.
 
-### Step 9 — Unmounting an NFS Remote Share
+### Step 9 — Unmounting an NFS Remote Share on the Client
 
 ```
 $ cd ~
