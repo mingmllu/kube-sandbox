@@ -99,4 +99,33 @@ To see how much space is actually being used under each mount point, use the dis
 
 ### Step 7 — Testing NFS Access
 
+### Step 8 — Mounting the Remote NFS Directories at Boot
+
+We can mount the remote NFS shares automatically at boot by adding them to /etc/fstab file on the client.
+
+```
+$ sudo nano /etc/fstab
+```
+
+At the bottom of the file, we're going to add a line for each of our shares. They will look like this:
+
+```
+10.0.0.12:/var/nfs/general    /nfs/general   nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0
+10.0.0.12:/home       /nfs/home      nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0
+```
+The client server will automatically mount the remote partitions at boot, although it may take a few moments for the connection to be made and the shares to be available.
+
+### Step 9 — Unmounting an NFS Remote Share
+
+```
+$ cd ~
+$ sudo umount /nfs/home
+$ sudo umount /nfs/general
+```
+This will remove the remote shares, leaving only your local storage accessible:
+
+```
+$ df -h
+```
+
 
