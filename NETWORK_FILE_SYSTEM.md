@@ -137,4 +137,13 @@ This will remove the remote shares, leaving only your local storage accessible:
 $ df -h
 ```
 
+## [Mount Ubuntu 16.04/18.04 NFS Shares On Windows 10 Client](https://websiteforstudents.com/mount-ubuntu-16-04-17-10-18-04-nfs-shares-on-windows-10-client/)
+
+### Configure an NFS server to accept all mount requests
+Add the line to the host's /etc/exports file:
+```
+/directory_to_share *(rw,no_root_squash,no_subtree_check)
+```
+So you don't have to add each client's IP address to the file /etc/exports file
+
 
