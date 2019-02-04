@@ -101,7 +101,8 @@ export KUBECONFIG=$HOME/.kube/config
     ```
     $ sudo service docker restart
     ```
-4. Check kubelet status
+4. Run ```sudo kubeadm join 135.222.154.219:6443 --token odsb5k.ho566dm6817oa696 --discovery-token-ca-cert-hash sha256:903d8bad14f6bb297a596fb39188164508a41bbe68d9f0410e3a429ce0059e0b```
+5. Check kubelet status
 ```
 $ systemctl status kubelet
 ● kubelet.service - kubelet: The Kubernetes Node Agent
@@ -117,8 +118,6 @@ $ systemctl status kubelet
    CGroup: /system.slice/kubelet.service
            └─10746 /usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml --cgrou
 ```
-5. Run ```sudo kubeadm join 135.222.154.219:6443 --token odsb5k.ho566dm6817oa696 --discovery-token-ca-cert-hash sha256:903d8bad14f6bb297a596fb39188164508a41bbe68d9f0410e3a429ce0059e0b```
-
 ### How to run a simple TFjob in the cluster (tested in AWS only)
 
 1. KF_ENV=default
