@@ -41,7 +41,10 @@ export KUBECONFIG=$HOME/.kube/config
 0. Requirements:
    * docker version 18.06. If docker version 18.09 installed, do not purge it, simply run ```sudo apt-get install docker-ce=18.06.1~ce~3-0~ubuntu``` to re-install the docker version that is supported by kubernetes
    * To execute the docker command without sudo, run ```sudo usermod -aG docker ${USER}``` and then ```su - ${USER}``` 
-1. Run ```sudo swapoff -a```
+1. Run ```sudo swapoff -a``` ti [disable swap](https://docs.platform9.com/support/disabling-swap-kubernetes-node/)
+   * [Check if swap is disabled](https://www.cyberciti.biz/faq/linux-check-swap-usage-command/): Run the command ```top``` and look at the information about swap for at least 60 seconds and make sure that swap is disable.
+   * If swap is getting re-enabled shortly, run the command ```sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab``` to comment out the lines containing the word ```swap``` in the file ```/etc/fstab```.
+   * Run ```sudo swapoff -a``` and check if swap is disabled.
 2. Install Kubernetes client
     * ```curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -```
     * ```echo 'deb http://apt.kubernetes.io/ kubernetes-xenial main' | sudo tee /etc/apt/sources.list.d/kubernetes.list```
@@ -102,22 +105,24 @@ export KUBECONFIG=$HOME/.kube/config
     $ sudo service docker restart
     ```
 4. Run ```sudo kubeadm join 135.222.154.219:6443 --token odsb5k.ho566dm6817oa696 --discovery-token-ca-cert-hash sha256:903d8bad14f6bb297a596fb39188164508a41bbe68d9f0410e3a429ce0059e0b```
-5. Check kubelet status
+5. Check kubelet status:
 ```
 $ systemctl status kubelet
 ● kubelet.service - kubelet: The Kubernetes Node Agent
    Loaded: loaded (/lib/systemd/system/kubelet.service; enabled; vendor preset: enabled)
   Drop-In: /etc/systemd/system/kubelet.service.d
            └─10-kubeadm.conf
-   Active: active (running) since Mon 2019-01-28 08:41:51 EST; 1 weeks 0 days ago
+   Active: active (running) since Tue 2019-02-05 16:32:28 EST; 14min ago
      Docs: https://kubernetes.io/docs/home/
- Main PID: 10746 (kubelet)
-    Tasks: 36
-   Memory: 80.9M
-      CPU: 13h 36min 28.506s
+ Main PID: 8168 (kubelet)
+    Tasks: 30
+   Memory: 48.0M
+      CPU: 37.261s
    CGroup: /system.slice/kubelet.service
-           └─10746 /usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml --cgrou
-```
+           └─8168 /usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml --cgroup-driver=cgroupfs
+ ```
+ 6. Troubleshooting: If you run into an error, run ```journalctl --reverse -xeu kubelet```
+ 
 ### How to run a simple TFjob in the cluster (tested in AWS only)
 
 1. KF_ENV=default
