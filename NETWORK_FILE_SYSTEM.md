@@ -146,4 +146,7 @@ Add the line to the host's /etc/exports file:
 ```
 So you don't have to add each client's IP address to the file /etc/exports file
 
-
+### Mount NFS drive on Windows
+```
+C:\Users\mmlu>mount 135.222.xxx.xxx:/var/nfs/data X:\
+```
